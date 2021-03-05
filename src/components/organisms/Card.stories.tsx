@@ -1,14 +1,12 @@
+import { Story } from "@storybook/react";
 import React from "react";
 import { Card } from "./Card";
 
-const Template = (args) => <Card {...args} />;
+const Template: Story = (args) => <Card {...args} />;
 
-export const FirstStory = Template.bind({});
+export const Index: Story = Template.bind({});
+Index.storyName = "useSwr connected component";
 
-FirstStory.args = {
-  /*👇 The args you need here will depend on your component */
-};
 export default {
   title: "Card",
-  component: Card,
 };

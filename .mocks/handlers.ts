@@ -1,27 +1,23 @@
 import { rest } from "msw";
-import type { Review } from "../types";
+import type { Source } from "../types";
 
 export const handlers = [
-  rest.get("https://my.backend/book", (req, res, ctx) => {
+  rest.get("https://myapi.dev/ssr", (_, res, ctx) => {
     return res(
       ctx.json({
-        title: "Lord of the Rings",
-        imageUrl: "/book-cover.jpg",
-        description:
-          "The Lord of the Rings is an epic high-fantasy novel written by English author and scholar J. R. R. Tolkien.",
-      })
+        title: "SSR Source",
+        text:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      } as Source)
     );
   }),
-  rest.get("https://my.backend/book/reviews", (req, res, ctx) => {
+  rest.get("https://myapi.dev/csr", (_, res, ctx) => {
     return res(
-      ctx.json([
-        {
-          id: "60333292-7ca1-4361-bf38-b6b43b90cb16",
-          author: "John Maverick",
-          text:
-            "Lord of The Rings, is with no absolute hesitation, my most favored and adored book by‑far. The triology is wonderful‑ and I really consider this a legendary fantasy series. It will always keep you at the edge of your seat‑ and the characters you will grow and fall in love with!",
-        },
-      ] as Review[])
+      ctx.json({
+        title: "CSR Source",
+        text:
+          "Lord of The Rings, is with no absolute hesitation, my most favored and adored book by‑far. The triology is wonderful‑ and I really consider this a legendary fantasy series. It will always keep you at the edge of your seat‑ and the characters you will grow and fall in love with!",
+      } as Source)
     );
   }),
 ];

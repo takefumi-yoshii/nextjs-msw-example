@@ -1,23 +1,31 @@
-import { useState } from "react";
+import type { GetServerSideProps } from "next";
+import React from "react";
+import type { Source } from "../../types";
 import { Card } from "../components/organisms/Card";
 
-export default function Home({ book }) {
+type Props = {
+  data: Source;
+};
+
+const Home = (props: Props) => {
   return (
     <div>
-      <img src={book.imageUrl} alt={book.title} width="250" />
-      <h1>{book.title}</h1>
-      <p>{book.description}</p>
+      <h1>{props.data.title}</h1>
+      <p>{props.data.text}</p>
       <Card />
     </div>
   );
-}
+};
 
-export async function getServerSideProps() {
-  const res = await fetch("https://my.backend/book");
-  const book = await res.json();
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  const data: Source = await fetch("https://myapi.dev/ssr").then((res) =>
+    res.json()
+  );
   return {
     props: {
-      book,
+      data,
     },
   };
-}
+};
+
+export default Home;

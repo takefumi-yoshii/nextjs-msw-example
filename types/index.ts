@@ -1,5 +1,4 @@
-export type Review = {
-  id: string;
-  author: string;
+export type Source = {
+  title: string;
   text: string;
 };
